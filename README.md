@@ -1,4 +1,4 @@
-##Implement the following functionality
+## Implement the following functionality
 
 1. Tasks can be edited.
 2. Strike the tasks which are marked as done.
