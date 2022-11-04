@@ -1,6 +1,11 @@
 import { useState, createContext } from 'react';
 
-const ThemeContext = createContext({});
+export interface IThemeContext {
+  theme: any;
+  toggleTheme: any;
+}
+
+const ThemeContext = createContext({} as IThemeContext);
 
 const ThemeProvider = (props: any) => {
   const [theme, setTheme] = useState('dark');

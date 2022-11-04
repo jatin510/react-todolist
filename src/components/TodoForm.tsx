@@ -15,7 +15,7 @@ export default function TodoForm() {
     e.preventDefault();
     setTaskInput('');
 
-    setTodos([...todos, { id: 6, task: taskInput }]);
+    setTodos([...todos, { id: Math.random(), task: taskInput }]);
   }
 
   return (
