@@ -1,12 +1,9 @@
-import { useContext, useState } from 'react';
 import TodoList from './components/TodoList';
 import './App.css';
-import { ThemeContext, ThemeProvider } from './contexts/ThemeContext';
+import { ThemeProvider } from './contexts/ThemeContext';
+import { TodoProvider } from './contexts/TodoContext';
 
 function App() {
-  const [count, setCount] = useState(0);
-
-  const value = useContext(ThemeContext);
   return (
     <div className="App">
       <TodoList />
@@ -17,7 +14,9 @@ function App() {
 function AppContainer() {
   return (
     <ThemeProvider>
-      <App />
+      <TodoProvider>
+        <App />
+      </TodoProvider>
     </ThemeProvider>
   );
 }
