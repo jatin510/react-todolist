@@ -1,5 +1,11 @@
 import { createContext, useState } from 'react';
-const TodoContext = createContext({});
+
+interface ITodoContext {
+  todos: any;
+  setTodos: any;
+}
+
+const TodoContext = createContext({} as ITodoContext);
 
 const TodoProvider = (props: any) => {
   const [todos, setTodos] = useState([{ id: 1, task: 1 }]);
