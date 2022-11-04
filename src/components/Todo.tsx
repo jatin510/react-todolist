@@ -1,10 +1,8 @@
-import { useContext } from 'react';
-
-export default function Todo() {
-  //   const todoContext = useContext(TodoContext);
+export default function Todo(props: any) {
+  const { todoDetails } = props;
   return (
     <>
-      <p>Todo</p>
+      <p>{todoDetails.task}</p>
     </>
   );
 }
