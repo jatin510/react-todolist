@@ -16,6 +16,11 @@ export default function TodoForm() {
     setTaskInput('');
 
     setTodos([...todos, { id: Math.random(), task: taskInput }]);
+    localStorage.removeItem('todos');
+    localStorage.setItem(
+      'todos',
+      JSON.stringify([...todos, { id: Math.random(), task: taskInput }])
+    );
   }
 
   return (

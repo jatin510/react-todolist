@@ -14,11 +14,16 @@ export interface ITodoContext {
 const TodoContext = createContext({} as ITodoContext);
 
 const TodoProvider = (props: any) => {
-  const [todos, setTodos] = useState([]);
+  const [todos, setTodos] = useState(() => {
+    const todos = localStorage.getItem('todos');
+    return todos ? JSON.parse(todos) : [];
+  });
 
   function deleteTodo(id: any) {
     const filteredTodos = todos.filter((todo: ITodo) => todo.id != id);
 
+    localStorage.removeItem('todos');
+    localStorage.setItem('todos', JSON.stringify(filteredTodos));
     setTodos(filteredTodos);
   }
 
