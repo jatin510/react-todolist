@@ -6,6 +6,7 @@ import { TodoProvider } from './contexts/TodoContext';
 function App() {
   return (
     <div className="App">
+      <p>Todolist </p>
       <TodoList />
     </div>
   );

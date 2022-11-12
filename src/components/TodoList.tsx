@@ -9,7 +9,6 @@ export default function TodoList() {
 
   return (
     <>
-      <p>Todolist </p>
       <TodoForm />
       {todos &&
         todos.map((todo: any) => <Todo key={todo.id} todoDetails={todo} />)}
