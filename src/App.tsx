@@ -2,6 +2,7 @@ import TodoList from './components/TodoList';
 import './App.css';
 import { ThemeProvider } from './contexts/ThemeContext';
 import { TodoProvider } from './contexts/TodoContext';
+import Header from './components/Header';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function AppContainer() {
   return (
     <ThemeProvider>
       <TodoProvider>
+        <Header />
         <App />
       </TodoProvider>
     </ThemeProvider>
