@@ -3,7 +3,7 @@ import { TodoContext } from '../contexts/TodoContext';
 
 export default function TodoForm() {
   const todoContext = useContext(TodoContext);
-  const { todos, setTodos } = todoContext;
+  const { addTodo } = todoContext;
 
   const [taskInput, setTaskInput] = useState('');
 
@@ -15,12 +15,7 @@ export default function TodoForm() {
     e.preventDefault();
     setTaskInput('');
 
-    setTodos([...todos, { id: Math.random(), task: taskInput }]);
-    localStorage.removeItem('todos');
-    localStorage.setItem(
-      'todos',
-      JSON.stringify([...todos, { id: Math.random(), task: taskInput }])
-    );
+    addTodo(taskInput);
   }
 
   return (

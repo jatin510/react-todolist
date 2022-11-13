@@ -1,4 +1,4 @@
-import { createContext, useState } from 'react';
+import { createContext, useCallback, useState } from 'react';
 
 export interface ITodo {
   id: string | number;
@@ -9,6 +9,8 @@ export interface ITodoContext {
   todos: ITodo[];
   setTodos: any;
   deleteTodo: any;
+  addTodo: any;
+  memoizedDeleteTodo: any;
 }
 
 const TodoContext = createContext({} as ITodoContext);
@@ -27,7 +29,23 @@ const TodoProvider = (props: any) => {
     setTodos(filteredTodos);
   }
 
-  const value = { todos, setTodos, deleteTodo };
+  const memoizedDeleteTodo = useCallback(
+    (id) => {
+      return deleteTodo(id);
+    },
+    [todos]
+  );
+
+  function addTodo(task) {
+    setTodos([...todos, { id: Math.random(), task }]);
+    localStorage.removeItem('todos');
+    localStorage.setItem(
+      'todos',
+      JSON.stringify([...todos, { id: Math.random(), task }])
+    );
+  }
+
+  const value = { todos, setTodos, deleteTodo, addTodo, memoizedDeleteTodo };
 
   return (
     <TodoContext.Provider value={value}>{props.children}</TodoContext.Provider>
