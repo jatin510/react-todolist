@@ -1,18 +1,18 @@
-import { useContext } from 'react';
-import { TodoContext } from '../contexts/TodoContext';
+import React from 'react';
 
-export default function Todo(props: any) {
-  const { todoDetails } = props;
-  const todoContext = useContext(TodoContext);
+let count = 1;
+const Todo = (props) => {
+  const { taskId, task, deleteTodo } = props;
 
-  const { deleteTodo } = todoContext;
-
+  console.log('todo rendered', count++);
   return (
     <>
       <div>
-        {todoDetails.task}
-        <button onClick={() => deleteTodo(todoDetails.id)}>X</button>
+        {task}
+        <button onClick={() => deleteTodo(taskId)}>X</button>
       </div>
     </>
   );
-}
+};
+
+export default React.memo(Todo);

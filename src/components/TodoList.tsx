@@ -5,13 +5,20 @@ import { TodoContext } from '../contexts/TodoContext';
 
 export default function TodoList() {
   const todoContext = useContext(TodoContext);
-  const { todos } = todoContext;
+  const { todos, memoizedDeleteTodo } = todoContext;
 
   return (
     <>
       <TodoForm />
       {todos &&
-        todos.map((todo: any) => <Todo key={todo.id} todoDetails={todo} />)}
+        todos.map((todo: any) => (
+          <Todo
+            key={todo.id}
+            task={todo.task}
+            taskId={todo.id}
+            deleteTodo={memoizedDeleteTodo}
+          />
+        ))}
     </>
   );
 }

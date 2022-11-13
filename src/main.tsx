@@ -4,7 +4,7 @@ import AppContainer from './App';
 import './index.css';
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
-  <React.StrictMode>
-    <AppContainer />
-  </React.StrictMode>
+  <AppContainer />
 );
+// <React.StrictMode>
+//   </React.StrictMode>
