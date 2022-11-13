@@ -2,14 +2,14 @@ import React from 'react';
 
 let count = 1;
 const Todo = (props) => {
-  const { taskId, task, deleteTodo } = props;
+  const { todo, setSelectedTodo } = props;
 
   console.log('todo rendered', count++);
   return (
     <>
       <div>
-        {task}
-        <button onClick={() => deleteTodo(taskId)}>X</button>
+        {todo.task}
+        <button onClick={() => setSelectedTodo(todo)}>X</button>
       </div>
     </>
   );

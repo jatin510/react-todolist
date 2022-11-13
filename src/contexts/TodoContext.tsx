@@ -10,7 +10,6 @@ export interface ITodoContext {
   setTodos: any;
   deleteTodo: any;
   addTodo: any;
-  memoizedDeleteTodo: any;
 }
 
 const TodoContext = createContext({} as ITodoContext);
@@ -29,13 +28,6 @@ const TodoProvider = (props: any) => {
     setTodos(filteredTodos);
   }
 
-  const memoizedDeleteTodo = useCallback(
-    (id) => {
-      return deleteTodo(id);
-    },
-    [todos]
-  );
-
   function addTodo(task) {
     setTodos([...todos, { id: Math.random(), task }]);
     localStorage.removeItem('todos');
@@ -45,7 +37,7 @@ const TodoProvider = (props: any) => {
     );
   }
 
-  const value = { todos, setTodos, deleteTodo, addTodo, memoizedDeleteTodo };
+  const value = { todos, setTodos, deleteTodo, addTodo };
 
   return (
     <TodoContext.Provider value={value}>{props.children}</TodoContext.Provider>
