@@ -10,6 +10,7 @@ export interface ITodoContext {
   setTodos: any;
   deleteTodo: any;
   addTodo: any;
+  editTodo: any;
 }
 
 const TodoContext = createContext({} as ITodoContext);
@@ -37,7 +38,22 @@ const TodoProvider = (props: any) => {
     );
   }
 
-  const value = { todos, setTodos, deleteTodo, addTodo };
+  function editTodo(todoId, task) {
+    const updatedTodos = todos.map((todo: ITodo) => {
+      if (todo.id === todoId) {
+        todo.task = task;
+      }
+    });
+
+    setTodos(updatedTodos);
+
+    localStorage.removeItem('todos');
+    localStorage.setItem(
+      'todos',
+      JSON.stringify([...todos, { id: Math.random(), task }])
+    );
+  }
+  const value = { todos, setTodos, deleteTodo, addTodo, editTodo };
 
   return (
     <TodoContext.Provider value={value}>{props.children}</TodoContext.Provider>
