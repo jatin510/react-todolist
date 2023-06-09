@@ -4,23 +4,37 @@ import { useContext, useEffect, useState } from 'react';
 import { TodoContext } from '../contexts/TodoContext';
 
 export default function TodoList() {
-  const [selectedTodo, setSelectedTodo] = useState(null);
+  const [deleteSelectedTodo, setDeleteSelectedTodo] = useState(null);
+  const [editSelectedTodo, setEditSelectedTodo] = useState(null);
+
   const todoContext = useContext(TodoContext);
-  const { todos, deleteTodo } = todoContext;
+  const { todos, deleteTodo, editTodo } = todoContext;
 
   useEffect(() => {
-    if (selectedTodo != null) {
-      deleteTodo(selectedTodo.id);
-      setSelectedTodo(null);
+    if (deleteSelectedTodo != null) {
+      deleteTodo(deleteSelectedTodo.id);
+      setDeleteSelectedTodo(null);
     }
-  }, [selectedTodo]);
+  }, [deleteSelectedTodo]);
+
+  useEffect(() => {
+    if (editSelectedTodo != null) {
+      editTodo(editSelectedTodo.id, editSelectedTodo.task);
+      setEditSelectedTodo(null);
+    }
+  }, [editSelectedTodo]);
 
   return (
     <>
       <TodoForm />
       {todos &&
         todos.map((todo: any) => (
-          <Todo key={todo.id} todo={todo} setSelectedTodo={setSelectedTodo} />
+          <Todo
+            key={todo.id}
+            todo={todo}
+            setDeleteSelectedTodo={setDeleteSelectedTodo}
+            setEditSelectedTodo={setEditSelectedTodo}
+          />
         ))}
     </>
   );

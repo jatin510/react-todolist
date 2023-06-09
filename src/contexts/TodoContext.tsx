@@ -42,17 +42,18 @@ const TodoProvider = (props: any) => {
     const updatedTodos = todos.map((todo: ITodo) => {
       if (todo.id === todoId) {
         todo.task = task;
+        todo.id = todoId;
       }
+
+      return todo;
     });
 
     setTodos(updatedTodos);
 
     localStorage.removeItem('todos');
-    localStorage.setItem(
-      'todos',
-      JSON.stringify([...todos, { id: Math.random(), task }])
-    );
+    localStorage.setItem('todos', JSON.stringify([...updatedTodos]));
   }
+
   const value = { todos, setTodos, deleteTodo, addTodo, editTodo };
 
   return (

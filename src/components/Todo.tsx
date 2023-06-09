@@ -1,18 +1,53 @@
-import React from 'react';
+import { useState } from 'react';
 
-let count = 1;
 const Todo = (props) => {
-  const { todo, setSelectedTodo } = props;
+  const { todo, setDeleteSelectedTodo, setEditSelectedTodo } = props;
 
-  console.log('todo rendered', count++);
+  const [editMode, setEditMode] = useState(false);
+  const [editedText, setEditedText] = useState(todo.task);
+
+  const handleInputChange = (e) => {
+    e.preventDefault();
+    setEditedText(e.target.value);
+  };
+
+  const handleSaveEdit = () => {
+    setEditSelectedTodo({ id: todo.id, task: editedText });
+    setEditMode(false);
+  };
+
   return (
     <>
       <div>
-        {todo.task}
-        <button onClick={() => setSelectedTodo(todo)}>X</button>
+        {editMode ? (
+          <div>
+            <input
+              type="text"
+              value={editedText}
+              onChange={handleInputChange}
+            />
+            <button onClick={handleSaveEdit}>Save</button>
+          </div>
+        ) : (
+          <span>{todo.task}</span>
+        )}
+        <button
+          onClick={() => {
+            setDeleteSelectedTodo(todo);
+          }}
+        >
+          X
+        </button>
+        <button
+          onClick={() => {
+            setEditMode(!editMode);
+          }}
+        >
+          Edit
+        </button>
       </div>
     </>
   );
 };
 
-export default React.memo(Todo);
+export default Todo;
